@@ -25,13 +25,17 @@ public class MessageService {
         return welcomeMessage;
     }
 
-    public void sendMessageWithAI(ChatMessage chatMessage) {
+    public void sendMessage(ChatMessage chatMessage) {
+        simpMessagingTemplate.convertAndSend("/topic/public", chatMessage);
+        simpMessagingTemplate.convertAndSend("/topic/public", sendMessageWithAI(chatMessage));
+    }
+
+    public ChatMessage sendMessageWithAI(ChatMessage chatMessage) {
         ChatMessage aiChatMessage = ChatMessage.builder()
                 .sender("AI")
                 .content(aiService.getChatbotResponse(chatMessage.getContent()))
                 .type(ChatMessage.MessageType.CHAT)
                 .build();
-        simpMessagingTemplate.convertAndSend("/topic/public", chatMessage);
-        simpMessagingTemplate.convertAndSend("/topic/public", aiChatMessage);
+        return aiChatMessage;
     }
 }
