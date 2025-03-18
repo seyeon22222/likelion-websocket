@@ -3,9 +3,14 @@ server:
 spring:
   application:
     name: likelion-websocket
+  rabbitmq:
+    username: admin
+    password: abcde12# #default Password
+    host: localhost # default host
+    port: 5672      #default port
   ai:
     openai:
-      api-key: ${OPENAI_API_KEY}
+      api-key: ${OPEN_AI_KEY}
       chat:
         options:
           model: gpt-4.5-turbo

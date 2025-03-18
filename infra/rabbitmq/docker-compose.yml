@@ -1,0 +1,19 @@
+version: '3'
+services:
+  rabbitmq:
+    image: rabbitmq:3.11-management
+    container_name: rabbitmq
+#    volumes:
+#      - ./.docker/rabbitmq/etc/:/etc/rabbitmq/
+#      - ./.docker/rabbitmq/data/:/var/lib/rabbitmq/
+#      - ./.docker/rabbitmq/logs/:/var/log/rabbitmq/
+    ports:
+      - "5672:5672"
+      - "25672:15672"
+      - "15672:15672"
+      - "15692:15692"
+      - "61613:61613"
+    environment:
+      RABBITMQ_ERLANG_COOKIE: "RabbitMQ-My-Cookies"
+      RABBITMQ_DEFAULT_USER: "admin"
+      RABBITMQ_DEFAULT_PASS: "abcde12#"

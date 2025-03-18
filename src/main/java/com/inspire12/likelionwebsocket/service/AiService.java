@@ -21,8 +21,10 @@ public class AiService {
     private String openAiApiKey;
 
     public String getChatbotResponse(String question) {
-        String prompt = "You are a helpful chatbot. question is " + question;
-        OpenAiApi openAiApi = OpenAiApi.builder()
+        String prompt = "1. 반갑게 인사를 해주고 내 말에 따듯한 반응을 해줘, " +
+                "2. 최대한 짧게 말해줘" +
+                "3. 내가 한 말은: " + question;
+        OpenAiApi openAiApi = openAiApi = OpenAiApi.builder()
                 .apiKey(openAiApiKey)
                 .build();
         ChatModel chatModel = OpenAiChatModel.builder()

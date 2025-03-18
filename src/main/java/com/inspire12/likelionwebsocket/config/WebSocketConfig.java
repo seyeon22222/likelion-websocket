@@ -3,14 +3,21 @@ package com.inspire12.likelionwebsocket.config;
 import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.converter.MappingJackson2MessageConverter;
 import org.springframework.messaging.converter.MessageConverter;
+import org.springframework.messaging.handler.invocation.HandlerMethodArgumentResolver;
+import org.springframework.messaging.simp.config.ChannelRegistration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.messaging.simp.stomp.StompCommand;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
+import org.springframework.web.socket.server.standard.ServletServerContainerFactoryBean;
+import org.springframework.web.socket.server.standard.TomcatRequestUpgradeStrategy;
+import org.springframework.web.socket.server.support.DefaultHandshakeHandler;
 
 import java.util.List;
 
@@ -20,8 +27,16 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
+//        config.setPathMatcher(new AntPathMatcher("."));
         // 클라이언트가 구독할 prefix 설정 (예: /topic)
-        config.enableSimpleBroker("/topic");
+        config.enableStompBrokerRelay("/topic", "/queue")
+                .setRelayHost("localhost")
+                .setRelayPort(61613)
+                .setSystemLogin("admin")
+                .setSystemPasscode("abcde12#")
+                .setClientLogin("admin")
+                .setClientPasscode("abcde12#");
+
         // 클라이언트가 메시지를 보낼 때 사용하는 prefix 설정 (예: /app)
         config.setApplicationDestinationPrefixes("/app");
     }
@@ -34,6 +49,8 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 //                .setAllowedOrigins("*")
                 .withSockJS();
     }
+
+
 
     @Override
     public boolean configureMessageConverters(List<MessageConverter> messageConverters) {
