@@ -20,4 +20,5 @@ public class ChatMessage {
     private String content;
     @Getter
     private String sender;
+
 }

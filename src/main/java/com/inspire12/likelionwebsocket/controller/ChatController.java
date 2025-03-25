@@ -32,4 +32,5 @@ public class ChatController {
     public ChatMessage addUser(ChatMessage chatMessage) {
         return messageService.createWelcomeMessage(chatMessage);
     }
+
 }
