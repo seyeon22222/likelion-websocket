@@ -33,17 +33,4 @@ public class ChatMessage {
 
         return welcomeMessage;
     }
-
-    // hello API 호출 시 사용할 메시지
-    public static ChatMessage createHelloMessage(String sender) {
-        ChatMessage helloMessage = ChatMessage.builder()
-            .sender("System")
-            .content("""
-					안녕하세요 여러분
-					""")
-            .type(MessageType.CHAT)
-            .build();
-
-        return helloMessage;
-    }
 }
