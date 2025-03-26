@@ -20,4 +20,17 @@ public class ChatMessage {
     private String content;
     @Getter
     private String sender;
+
+    public static ChatMessage createTestMessage(String sender, String content) {
+        ChatMessage testMessage = ChatMessage.builder()
+            .sender(sender)
+            .content(
+                String.format("""
+                        %s
+                        """, content))
+            .type(ChatMessage.MessageType.CHAT)
+            .build();
+
+        return testMessage;
+    }
 }
