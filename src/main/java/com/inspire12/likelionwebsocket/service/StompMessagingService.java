@@ -18,8 +18,8 @@ public class StompMessagingService {
 
 
     public void sendToUser(String username, ChatMessage chatMessage) {
-//        simpMessagingTemplate.convertAndSendToUser(username, "/queue/private", chatMessage);
-        simpMessagingTemplate.convertAndSend("/user/" + username + "/queue/private", chatMessage);
+        simpMessagingTemplate.convertAndSendToUser(username, "/queue/private", chatMessage);
+//        simpMessagingTemplate.convertAndSend("/user/" + username + "/queue/private", chatMessage);
     }
 
 //    public ChatMessage createWelcomeMessage(ChatMessage chatMessage) {

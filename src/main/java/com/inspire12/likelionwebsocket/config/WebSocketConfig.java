@@ -52,9 +52,10 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         // WebSocket 연결 엔드포인트 등록, SockJS fallback 제공
         registry.addEndpoint("/ws")
-//                .setAllowedOrigins("http://localhost:3000") // 클라이언트 주소 허용
-//                .setAllowedOrigins("*") // 클라이언트 주소 허용
-                .setAllowedOriginPatterns("http://172.*", "http://localhost:*")
+//                .setAllowedOrigins("http://localhost:3000") //  // 정확한 매칭, * 는 사용불가
+
+//                .setAllowedOriginPatterns("http://172.*", "http://localhost:*")
+                .setAllowedOriginPatterns("*")
                 .setHandshakeHandler(customHandshakeHandler)
                 .withSockJS();
     }
