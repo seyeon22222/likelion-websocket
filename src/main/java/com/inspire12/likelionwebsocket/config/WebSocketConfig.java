@@ -29,7 +29,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
         // 클라이언트가 구독할 prefix 설정 (예: /topic)
-        config.enableSimpleBroker("/topic");
+        config.enableSimpleBroker("/topic", "/queue");
         // 클라이언트가 메시지를 보낼 때 사용하는 prefix 설정 (예: /app)
         config.setApplicationDestinationPrefixes("/app");
         config.setUserDestinationPrefix("/user");
