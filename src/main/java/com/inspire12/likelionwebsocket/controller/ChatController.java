@@ -24,6 +24,6 @@ public class ChatController {
     @MessageMapping("/chat.addUser")
     @SendTo("/topic/public")
     public ChatMessage addUser(ChatMessage chatMessage) {
-        return messageService.createWelcomeMessage(chatMessage);
+        return ChatMessage.createWelcomeMessage(chatMessage.getSender());
     }
 }
